@@ -1,0 +1,49 @@
+ADONET2_1012
+
+커넥션스트링 기본준비
+1.참조추가 두개 
+
+2.App.config에서
+<connectionStrings>
+    <add name="goodie" connectionString="Server=;Uid=;Pwd=;Database="/>
+  </connectionStrings>
+=>> 네임은 내맘대로 커넥션 기본주소 써주기 Server뒤에서 ,3306처럼 포트 써도되고 생략가능
+name="goodie" connectionString="Server=127.0.0.1,3305;Uid=root;Pwd=1234;Database=employees
+이렇게 
+
+3. 코드 
+string strConn = ConfigurationManager.ConnectionStrings["goodie"].ConnectionString;
+자주 쓸수 있으니 전역으로 써줌
+
+연결지향 방법 순서
+1. Connection 
+   - open() (open하기전에 반드시 connectionString해야함), close()
+2. Command
+   - CommandText
+   - ExecuteReader( ) : 셀렉트문을 할때 
+   - ExecuteNonQuery( ) : (업데이트, 인서트, 딜리트) 처럼 뭐가 적용됐는지 보여주는것
+		     셀렉트문을 쓸때 쓰면 아무런 결과값을 가져오지 않는다 (인트로 준다)
+   - ExecuteScala( ) : 스칼라는 값이라는뜻 값 1개만 가져올때 쓴다 (오브젝트 타입으로 준다)
+
+3. DataReader
+   - Read() : 리드 함수를 불러올때마다 다음줄의 데이터를 포커스함
+ 	while( Read() ) 이런식으로 사용해 Read()값이 트루일때까지 읽는식으로 사용함
+
+비연결지향 방법 순서
+DataAdapter : 데이터셋에 담아주는 객체
+
+데이터그리드뷰 속성
+Columns : 데이터그리드뷰의 컬럼을 설정하는 것
+dataGridView1.AutoGenerateColumns : 이건 속성창에 보이지않아 코드로 . 찍어서 써야한다
+			        	 열이 자동으로 생성되게 하는 속성 디폴트는  true
+
+데이터그리드뷰 이벤트핸들러
+(Double)Click : 데이터 그리드뷰 어디든 클릭했을때
+CellClick(Double) : 셀을 클릭했을때
+CellContentClick(Double) : 내용이 있는 셀을 클릭했을때
+나머진 소스파일 확인! 
+
+디자인을 완료하면 탭인덱스를 사용해 포커스를 맞춰주기
+
+
+
